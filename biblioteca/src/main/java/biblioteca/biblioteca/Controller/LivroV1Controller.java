@@ -1,6 +1,5 @@
 package biblioteca.biblioteca.Controller;
 
-import biblioteca.biblioteca.Dto.AutorResponseDto;
 import biblioteca.biblioteca.Dto.LivroPostPutDto;
 import biblioteca.biblioteca.Dto.LivroResponseDto;
 import biblioteca.biblioteca.Service.LivroCrudService;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/v1/Livroes", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/v1/Livros", produces = MediaType.APPLICATION_JSON_VALUE)
 public class LivroV1Controller {
 
     @Autowired
@@ -35,15 +34,15 @@ public class LivroV1Controller {
                 .body(LivroCrudService.buscarTodosLivros());
     }
 
-    @GetMapping("/{isbn}")
+    @GetMapping("/isbn/{isbn}")
     public ResponseEntity<LivroResponseDto> buscarLivroPorISBN(@PathVariable String isbn) {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(LivroCrudService.buscarLivroPorISBN(isbn));
     }
 
-    @GetMapping("/{titulo}")
-    public ResponseEntity<LivroResponseDto> buscarLivroPorTitulo(@PathVariable String titulo) {
+    @GetMapping("/titulo")
+    public ResponseEntity<List<LivroResponseDto>> buscarLivroPorTitulo(@RequestParam String titulo) {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(LivroCrudService.buscarLivroPorTitulo(titulo));

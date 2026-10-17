@@ -19,7 +19,7 @@ public class Livro {
     @JsonProperty("id")
     private Long id;
 
-    @Column(name = "ds_ISBN", nullable = false)
+    @Column(name = "ds_ISBN", nullable = false, unique = true)
     @JsonProperty("ISBN")
     private String isbn;
 
@@ -27,11 +27,12 @@ public class Livro {
     @JsonProperty("titulo")
     private String titulo;
     
-    @Column(name = "ds_autor", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "autor_id", nullable = false)
     @JsonProperty("autor")
-    @ManyToOne Autor autor;
+    private Autor autor;
 
-    @Column(name = "ds_ano", nullable = true)
+    @Column(name = "ds_ano", nullable = false)
     @JsonProperty("ano")
     private int ano;
     
